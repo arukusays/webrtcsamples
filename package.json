@@ -1,0 +1,24 @@
+{
+  "name": "webrtcsample",
+  "version": "1.0.0",
+  "description": "# 参考 - https://webrtc.github.io/samples/ - https://qiita.com/yusuke84/items/43a20e3b6c78ae9a8f6c - https://html5experts.jp/series/webrtc2016/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arukusays/webrtcsamples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arukusays/webrtcsamples/issues"
+  },
+  "homepage": "https://github.com/arukusays/webrtcsamples#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0"
+  }
+}
