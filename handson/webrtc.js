@@ -73,6 +73,20 @@ function prepareNewConnection(isOffer) {
         }
     };
 
+    peer.oniceconnectionstatechange = function() {
+        console.log('ICE connection Status has changed to ' + peer.iceConnectionState);
+        switch(peer.iceConnectionState) {
+            case 'closed':
+            case 'failed':
+                if(peerConnection){
+                    hangUp();
+                }
+                break;
+            case 'disconnected':
+                break;
+        }
+    };
+
     // ローカルのMediaStreamを利用できるようにする
     if (localStream) {
         console.log('Adding local stream...');
@@ -161,4 +175,25 @@ async function setAnswer(sessionDescription){
         console.error('setRemoteDescription(answer) ERROR: ', err);
     }
 
+}
+
+// P2P通信を切断する
+function hangUp() {
+    if (peerConnection) {
+        if(peerConnection.iceConnectionState !== 'closed') {
+            peerConnection.close();
+            peerConnection = null;
+            negotiationneededCounter = 0;
+            cleanupVideoElement(remoteVideo);
+            textForSendSdp = '';
+            return;
+        }
+    }
+    console.log('peerConnection is closed.');
+}
+
+// ビデオエレメントを初期化する
+function cleanupVideoElement(element){
+    element.pause();
+    element.srcObject = null;
 }
